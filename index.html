@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>alittlepomp — drawings</title>
+<meta name="description" content="Drawings of rabbits and hares.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="home">
+
+<div class="slideshow" id="slideshow">
+
+  <header class="overlay">
+    <a class="mark" href="index.html">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 18c-1-5-1-10 1.5-11.5S18 8 18 12" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M22 18c1-5 1-10-1.5-11.5S18.5 8 18.5 12" stroke-width="1.4" stroke-linecap="round"/>
+        <ellipse cx="18" cy="24" rx="9" ry="7.5" stroke-width="1.4"/>
+        <circle cx="15" cy="22" r="0.9" fill="#FAF9F6"/>
+      </svg>
+      <span>alittlepomp</span>
+    </a>
+    <nav class="site">
+      <a href="index.html" aria-current="page">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Each .slide is a placeholder. To use a real image, replace the
+       <div class="placeholder-fill">...</div> with:
+       <img src="images/your-file.jpg" alt="Description of the artwork"> -->
+
+  <div class="slide active">
+    <div class="placeholder-fill">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 18c-1-5-1-10 1.5-11.5S18 8 18 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M22 18c1-5 1-10-1.5-11.5S18.5 8 18.5 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <ellipse cx="18" cy="24" rx="9" ry="7.5" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      <span>Plate I — add image-1.jpg</span>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="placeholder-fill">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 18c-1-5-1-10 1.5-11.5S18 8 18 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M22 18c1-5 1-10-1.5-11.5S18.5 8 18.5 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <ellipse cx="18" cy="24" rx="9" ry="7.5" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      <span>Plate II — add image-2.jpg</span>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="placeholder-fill">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 18c-1-5-1-10 1.5-11.5S18 8 18 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M22 18c1-5 1-10-1.5-11.5S18.5 8 18.5 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <ellipse cx="18" cy="24" rx="9" ry="7.5" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      <span>Plate III — add image-3.jpg</span>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="placeholder-fill">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 18c-1-5-1-10 1.5-11.5S18 8 18 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M22 18c1-5 1-10-1.5-11.5S18.5 8 18.5 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <ellipse cx="18" cy="24" rx="9" ry="7.5" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      <span>Plate IV — add image-4.jpg</span>
+    </div>
+  </div>
+
+  <div class="slide-info" id="slideInfo">Plate I</div>
+
+  <div class="slide-dots" id="slideDots">
+    <button class="active" aria-label="Show plate 1"></button>
+    <button aria-label="Show plate 2"></button>
+    <button aria-label="Show plate 3"></button>
+    <button aria-label="Show plate 4"></button>
+  </div>
+
+  <a class="scroll-cue" href="gallery.html">View full gallery ↓</a>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slide-dots button');
+  const info = document.getElementById('slideInfo');
+  const numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+  let current = 0;
+  let timer;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function showSlide(index){
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    info.textContent = 'Plate ' + numerals[current];
+  }
+
+  function next(){
+    showSlide((current + 1) % slides.length);
+  }
+
+  function startAutoplay(){
+    if (reduceMotion || slides.length < 2) return;
+    timer = setInterval(next, 5000);
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      clearInterval(timer);
+      showSlide(i);
+      startAutoplay();
+    });
+  });
+
+  startAutoplay();
+</script>
+
+</body>
+</html>
