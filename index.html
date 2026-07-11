@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>alittlepomp — drawings</title>
+<meta name="description" content="Drawings of rabbits and hares.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="home">
+
+<div class="slideshow" id="slideshow">
+
+  <header class="overlay">
+    <a class="mark" href="index.html">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 18c-1-5-1-10 1.5-11.5S18 8 18 12" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M22 18c1-5 1-10-1.5-11.5S18.5 8 18.5 12" stroke-width="1.4" stroke-linecap="round"/>
+        <ellipse cx="18" cy="24" rx="9" ry="7.5" stroke-width="1.4"/>
+        <circle cx="15" cy="22" r="0.9" fill="#FAF9F6"/>
+      </svg>
+      <span>alittlepomp</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <nav class="site">
+      <a href="gallery.html">ETERNAL SPRING</a>
+      <a href="the-model.html">THE MODEL</a>
+      <a href="about.html">Biography</a>
+      <a href="contact.html">Contact</a>
+      <a href="quest.html">QUEST</a>
+    </nav>
+  </header>
+
+  <!-- Each .slide is a placeholder. To use a real image, replace the
+       <div class="placeholder-fill">...</div> with:
+       <img src="images/your-file.jpg" alt="Description of the artwork"> -->
+
+  <div class="slide active">
+    <img src="images/lightning!.jpg" alt="Bunnies, watercolor, gouache, works on paper" style="object-position: center;">
+  </div>
+
+  <div class="slide">
+    <picture>
+      <source media="(max-width: 600px)" srcset="images/henry-mobile.jpg">
+      <img src="images/henry.jpg" alt="Henry, cat, ink, watercolor, works on paper" style="object-position: bottom;">
+    </picture>
+  </div>
+
+  <div class="slide">
+    <img src="images/Redoubt Volcano Through Window.jpg" alt="Redoubt Volcano, Ninilchik, Alaska, AK, ink, watercolor, works on paper">
+  </div>
+
+  <div class="slide">
+    <img src="images/Lubber Triumvirate.jpg" alt="Eastern lubber grasshopper, Florida, FL, ink, watercolor, works on paper">
+  </div>
+
+  <div class="slide">
+    <picture>
+      <source media="(max-width: 600px)" srcset="images/lainey_plasma_003-mobile.jpg">
+      <img src="images/lainey_plasma_003.jpg" alt="Lainey, ink, graphite, colored pencil, works on paper" style="object-position: top;">
+    </picture>
+  </div>
+
+  <div class="slide">
+    <img src="images/dirt_wizard_with_amanita_muscaria.jpg" alt="Wizard, Talkeetnah, Alaska, AK, ink, watercolor, works on paper">
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  let timer;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function showSlide(index){
+    slides[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+  }
+
+  function next(){
+    showSlide((current + 1) % slides.length);
+  }
+
+  function startAutoplay(){
+    if (reduceMotion || slides.length < 2) return;
+    timer = setInterval(next, 5000);
+  }
+
+  startAutoplay();
+</script>
+
+<script src="nav.js"></script>
+</body>
+</html>
